@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>Một Ổ Nha! - Tiệm Bánh Mì Nhỏ</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#fdf6e3;font-family:-apple-system,system-ui;display:flex;justify-content:center}
+.game{width:100%;max-width:440px;min-height:100vh;background:#fff;position:relative;padding-bottom:90px}
+.header{display:flex;justify-content:space-between;padding:14px 16px;background:#fff8e1;border-bottom:1px solid #f0e2c3;position:sticky;top:0}
+.money{color:#e05a33;font-weight:900}.star{color:#f5a623}
+.img{height:200px;background:linear-gradient(#ffecd2,#fcb69f);display:flex;align-items:center;justify-content:center;font-size:80px}
+.story{padding:16px;line-height:1.7;font-size:16px}
+.choice{padding:0 16px}
+.choice button{width:100%;text-align:left;padding:14px 16px;margin:8px 0;border:1.5px solid #e6d5b8;background:#fffaf0;border-radius:14px;font-size:15px}
+.choice button:active{background:#ffe9c7}
+.footer{position:fixed;bottom:0;width:100%;max-width:440px;background:#fff;border-top:1px solid #eee;padding:10px 16px;display:flex;gap:8px}
+.footer button{flex:1;padding:12px;border:none;border-radius:12px;font-weight:700}
+.btn-next{background:#ff8a5b;color:#fff}
+</style>
+</head>
+<body>
+<div class="game">
+  <div class="header"><div>📅 Ngày <b id="day">1</b>/10</div><div><span class="star">⭐<span id="rep">5.0</span></span> | <span class="money" id="money">100k</span></div></div>
+  <div class="img" id="emoji">🥖</div>
+  <div class="story" id="text"></div>
+  <div class="choice" id="choices"></div>
+</div>
+
+<script>
+let day=1, money=100, rep=5.0;
+let scenes=[
+{emoji:"👵", text:"Ngày 1: Bà Tư đầu ngõ: 'Con ơi cho Tư ổ không ớt, ít pate thôi. Tư đau bao tử mấy bữa nay.'\nBà nhìn ổ bánh 15k hơi chần chừ.", choices:[
+{t:"Bán 15k như cũ", m:15, r:0, next:"Bạn bán. Bà cảm ơn rối rít."},
+{t:"Lấy 10k thôi, biếu bà", m:10, r:0.3, next:"Bà Tư rưng rưng: 'Mai Tư rao cả xóm ủng hộ con!'"}
+]},
+{emoji:"🛵", text:"Ngày 2: Anh shipper chạy vội vào: 'Em ơi 2 ổ full topping, anh kẹt 3 đơn! Nhưng em còn có 1 ổ thôi.'", choices:[
+{t:"Bán 1 ổ, xin lỗi anh kia", m:20, r:0, next:"Anh shipper thông cảm, hứa mai quay lại."},
+{t:"Xé đôi ổ ra làm 2, mỗi người nửa ổ", m:30, r:-0.5, next:"Cả 2 khách đều không vui, đánh giá 1 sao."}
+]},
+{emoji:"📱", text:"Ngày 3: Bạn thân: 'Ê để tao quay TikTok review tiệm mày nhé, đảm bảo viral! Nhưng tao lấy 50k tiền diễn.'", choices:[
+{t:"Ok, đầu tư 50k", m:-50, r:0.5, next:"Clip lên 10k view! Mai khách đông hơn."},
+{t:"Thôi tự bán từ từ", m:0, r:0, next:"Bạn hơi buồn nhưng vẫn ủng hộ."}
+]},
+{emoji:"🌧️", text:"Ngày 4: Trời mưa to, ế ẩm. Cô sinh viên: 'Chị ơi em hết tiền, cho em thiếu 5k mai em trả được không? Ổ 20k mà em còn 15k.'", choices:[
+{t:"Cho thiếu", m:15, r:0.4, next:"Hôm sau cô quay lại trả 20k và dẫn thêm 2 bạn."},
+{t:"Không được em ơi, chị cũng kẹt", m:0, r:-0.2, next:"Cô bé buồn bã bỏ đi."}
+]},
+{emoji:"😡", text:"Ngày 5: Khách khó tính: 'Bánh mì gì mà khô queo, pate ít xịu! Làm lại cho tôi!'", choices:[
+{t:"Làm lại ổ mới free", m:-15, r:0.3, next:"Khách nguôi giận, sửa đánh giá 5 sao."},
+{t:"Cãi lại: Bánh nhà em vẫn vậy!", m:20, r:-0.8, next:"Khách bóc phốt lên group khu phố."}
+]},
+{emoji:"🐱", text:"Ngày 6: Một con mèo hoang vào tiệm trú mưa, khách thấy cute đòi chụp ảnh.", choices:[
+{t:"Cho mèo ở lại làm linh vật", m:-10, r:0.6, next:"Tiệm có mèo, khách check-in nhiều hơn!"},
+{t:"Đuổi mèo đi cho sạch", m:0, r:-0.3, next:"Khách yêu mèo đánh giá thấp."}
+]},
+{emoji:"📈", text:"Ngày 7: Giá pate tăng 30%. Nhà cung cấp báo: từ 200k lên 260k/thùng.", choices:[
+{t:"Vẫn giữ nguyên liệu ngon, tăng giá bánh lên 25k", m:0, r:-0.2, next:"Khách chê mắc nhưng vẫn mua."},
+{t:"Đổi sang pate rẻ hơn", m:10, r:-0.5, next:"Lời hơn nhưng khách chê dở."}
+]},
+{emoji:"🎤", text:"Ngày 8: Phường tổ chức hội chợ, mời bạn 1 gian hàng 100k/ngày. Có thể bán gấp 3.", choices:[
+{t:"Chơi lớn, thuê gian hàng", m:-100, r:0, next:"Bạn bán được 300k ở hội chợ!"},
+{t:"Ở lại tiệm cho chắc", m:40, r:0, next:"Ngày bình yên, bán đều đều."}
+]},
+{emoji:"💌", text:"Ngày 9: Bạn nhận được thư: Chủ nhà trọ tăng giá thuê từ 3tr lên 4tr tháng sau.", choices:[
+{t:"Cố gắng cày, mai bán 50 ổ", m:0, r:0, next:"Bạn thức tới 2h sáng chuẩn bị nguyên liệu."},
+{t:"Tính chuyện nghỉ bán", m:0, r:0, next:"Bạn hơi nản nhưng vẫn ráng."}
+]},
+{emoji:"🏁", text:"Ngày 10: Ngày cuối tháng. Bạn ngồi đếm lại...", choices:[
+{t:"Xem kết quả", m:0, r:0, next:"END"}
+]},
+];
+
+let idx=0;
+function render(){
+ document.getElementById('day').innerText=day;
+ document.getElementById('money').innerText=money+'k';
+ document.getElementById('rep').innerText=rep.toFixed(1);
+ document.getElementById('emoji').innerText=scenes[idx].emoji;
+ document.getElementById('text').innerText=scenes[idx].text;
+ document.getElementById('choices').innerHTML=scenes[idx].choices.map((c,i)=>`<button onclick="choose(${i})">${c.t}</button>`).join('');
+}
+function choose(i){
+ let c=scenes[idx].choices[i];
+ money+=c.m; rep=Math.max(0,Math.min(5,rep+c.r));
+ alert(c.next);
+ idx++; day++;
+ if(day>10){
+   let ending="";
+   if(money>=250 && rep>=4.5) ending="🌟 KẾT ĐẸP - Tiệm Nổi Tiếng: Bạn có 250k+ và 4.5 sao, được báo mời phỏng vấn, tiệm thành thương hiệu khu phố!";
+   else if(money>=100) ending="🙂 KẾT BÌNH THƯỜNG - Đủ Sống: Bạn đủ tiền đóng trọ, tiệm vẫn duy trì, mèo vẫn ở lại.";
+   else ending="😢 KẾT BUỒN - Phải Nghỉ Bán: Hết tiền, bạn phải trả mặt bằng, nhưng bà Tư và mọi người vẫn nhớ ổ bánh mì của bạn.";
+   document.getElementById('text').innerText=ending+"\n\nTiền cuối: "+money+"k - Sao: "+rep.toFixed(1)+"\n\nBấm F5 để chơi lại.";
+   document.getElementById('choices').innerHTML=`<button onclick="location.reload()">Chơi lại</button>`;
+   document.getElementById('emoji').innerText="🏠";
+   return;
+ }
+ render();
+}
+render();
+</script>
+</body>
+</html>
