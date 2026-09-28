@@ -2,163 +2,123 @@
 <html lang="vi">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Gia Đình Của Tôi</title>
-<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&display=swap" rel="stylesheet">
 <style>
-*{box-sizing:border-box;font-family:'Baloo 2',sans-serif;margin:0;padding:0}
-body{background:#fff7f0;display:flex;justify-content:center}
-#app{width:100%;max-width:430px;background:#fffaf6;min-height:100vh;padding-bottom:90px;position:relative}
-.top{background:#4a1830;color:#fff;display:flex;justify-content:space-between;padding:12px 14px;position:sticky;top:0;z-index:10}
-.top b{font-size:20px}.ket{color:#ffde59;font-size:24px;font-weight:800}
-.card{background:#ff4d4d;border-radius:24px;margin:12px;padding:16px; color:#fff; position:relative;}
-.card h1{font-size:34px;line-height:1}
-.card::after{content:'';position:absolute;left:0;right:0;bottom:-8px;height:16px;background:radial-gradient(circle at 10px 0,transparent 10px,#fffaf6 11px);background-size:20px 20px}
-.tabs{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin:12px}
-.tab{background:#fff;border-radius:14px;padding:11px 4px;text-align:center;font-size:14px;border:2px solid #fff;box-shadow:0 2px 0 #eee}
+body{margin:0;background:#fff7f0;font-family:system-ui;display:flex;justify-content:center}
+#app{width:430px;max-width:100%;background:#fffaf6;min-height:100vh}
+.top{background:#4a1830;color:#fff;display:flex;justify-content:space-between;padding:12px;text-align:center}
+.top b{font-size:20px}
+.card{background:#ff4d4d;color:#fff;border-radius:20px;margin:12px;padding:16px}
+.tab-row{display:flex;gap:8px;margin:12px}
+.tab{flex:1;background:#fff;padding:10px;border-radius:12px;text-align:center;border:2px solid #eee}
 .tab.active{border-color:#ff4d4d;color:#ff4d4d}
-.box{background:#fff;border-radius:18px;margin:12px;padding:14px;border:1px solid #ffe3b8}
-.yellow{background:#fff8c6;display:flex;gap:10px;align-items:center}
-.yellow button{background:#ff3b3b;color:#fff;border:none;padding:10px 16px;border-radius:12px;font-weight:800}
-.pink{background:#ffe9ee}
-.row{display:flex;justify-content:space-between;padding:10px 0;border-top:1px dashed #ffb6c1}
-.lyBox{width:140px;height:190px;border:3px solid #4a2a1a;border-top:none;border-radius:0 0 30px 30px;margin:10px auto;position:relative;background:#fff;overflow:hidden}
-.nuoc{position:absolute;bottom:0;left:0;right:0;background:#c9985a}
-.vach{position:absolute;left:0;right:0;border-top:2px dashed red}
-.btnRed{width:100%;background:#ff3b3b;color:#fff;border:none;padding:14px;border-radius:16px;font-size:18px;font-weight:800;margin-top:10px;box-shadow:0 4px 0 #b52020}
-.btnSmall{padding:8px 12px;border-radius:10px;border:1px solid #eee;background:#fff;font-weight:700}
-.bar{height:6px;background:#eee;border-radius:10px;overflow:hidden}.bar i{display:block;height:100%;background:#4ade80;width:100%}
+.box{background:#fff;border-radius:16px;margin:12px;padding:12px;border:1px solid #ffe3b8}
+button{padding:10px 14px;border-radius:10px;border:none;font-weight:700;cursor:pointer}
+.btn-red{background:#ff3b3b;color:#fff}
+.btn-yel{background:#ffe27a}
+.ly{width:120px;height:160px;border:3px solid #333;border-top:none;border-radius:0 0 24px 24px;margin:10px auto;position:relative;background:#fff;overflow:hidden}
+.nuoc{position:absolute;bottom:0;left:0;right:0;background:#c99a5a}
 </style>
 </head>
 <body>
 <div id="app">
-<div class="top"><div>Ngày <b id="day">1</b><div style="font-size:11px;opacity:.7">Gia Đình Của Tôi</div></div><div style="text-align:center">KÉT<div class="ket" id="ket">400k</div></div><div style="text-align:right"><div id="saoHead">★★★★☆</div><div style="font-size:11px"><span id="diemTB">4.0</span> · <span id="slDG">0</span> đánh giá</div></div></div>
+<div class="top"><div>Ngày <b id="day">1</b></div><div>KÉT <b id="ket">400k</b></div><div>★ 4.0</div></div>
 
-<div class="card"><div style="font-size:56px;position:absolute;right:10px;top:10px">👨‍👩‍👧‍👦</div><h1>Gia Đình Của Tôi</h1><div>Cấp <span id="cap">1</span> · Xe đẩy vỉa hè · <span id="xp">0/150 XP</span></div></div>
+<div class="card"><h1 style="margin:0">Gia Đình Của Tôi</h1><div>Cấp 1 · Xe đẩy vỉa hè · <span id="xp">0/150 XP</span> 👨‍👩‍👧‍👦</div></div>
 
-<div class="tabs">
-<div class="tab active" onclick="openTab('kho')">🧺 Kho</div>
-<div class="tab" onclick="openTab('pha')">🍹 Pha chế</div>
-<div class="tab" onclick="openTab('sach')">📘 Sổ sách</div>
-</div>
-
-<div id="kho">
-<div class="box yellow"><div style="font-size:40px">👩‍🌾</div><div style="flex:1"><b>Đi chợ trả giá</b><div style="font-size:13px">Chốt giá với cô Hai, bớt tới <span id="giam">15%</span> tiền nhập</div></div><button onclick="traGia()">Trả giá</button></div>
-<div class="box" id="khoList"></div>
-<div class="box pink"><b>Nhiệm vụ hôm nay</b>
-<div class="row"><span>Không để khách bỏ về<br><small>Thưởng 20k +30XP</small></span><b style="color:#ff3b3b">cuối ngày</b></div>
-<div class="row"><span>Bán 8 ly<br><small>Thưởng 20k +30XP</small></span><b id="nvBan">0/8</b></div>
-<div class="row"><span>3 khách 5 sao<br><small>Thưởng 20k +30XP</small></span><b id="nvSao">0/3</b></div>
-</div>
-<button class="btnRed" onclick="moCua()">Mở cửa bán → Nấu & nhập · <span id="tongTien">0k</span></button>
+<div class="tab-row">
+<div class="tab active" id="tKho" onclick="showTab('kho')">Kho</div>
+<div class="tab" id="tPha" onclick="showTab('pha')">Pha chế</div>
+<div class="tab" id="tSach" onclick="showTab('sach')">Sổ sách</div>
 </div>
 
-<div id="pha" style="display:none">
-<div class="box">
-<div style="display:flex;justify-content:space-between"><b id="tenKh">Khách: Bé Na</b><span id="camXuc">😊</span></div>
-<div style="background:#fff8e1;padding:8px;border-radius:10px;margin:8px 0;font-size:14px" id="yeuCau"></div>
-<div class="bar"><i id="patBar"></i></div>
-</div>
-<div class="box" style="text-align:center">
-<div>Ly: <button class="btnSmall" onclick="setLy('M')" id="bM">M</button> <button class="btnSmall" onclick="setLy('L')" id="bL">L</button> | Trà: <span id="traBtns"></span></div>
-<div class="lyBox"><div class="vach" id="vach"></div><div class="nuoc" id="nuoc"></div><div id="topInLy" style="position:absolute;bottom:20px;width:100%;text-align:center;font-size:20px"></div></div>
-<button class="btnSmall" style="background:#ffe27a;padding:12px 20px" onmousedown="startRot()" onmouseup="stopRot()" ontouchstart="startRot()" ontouchend="stopRot()">GIỮ ĐỂ RÓT</button>
-<div>Rót: <span id="pctRot">0%</span> / Cần: <span id="pctCan">65%</span></div>
-<div style="margin-top:8px">Topping: <span id="topBtns2"></span> <br>Đã chọn: <b id="topDaChon">Không</b></div>
-<div>Đường <input type="range" id="rngDuong" min="0" max="100" value="50"> <span id="vDuong">50%</span> | Đá <input type="range" id="rngDa" min="0" max="100" value="50"> <span id="vDa">50%</span></div>
-<div style="display:flex;gap:8px;margin-top:10px"><button class="btnRed" style="flex:1" onclick="giao()">Dán nắp & Giao</button><button class="btnSmall" onclick="doBo()">Đổ bỏ</button></div>
-</div>
+<div id="kho" class="box">
+<p><b>Đi chợ trả giá</b> - Giảm <span id="giam">15</span>% <button class="btn-red" onclick="traGia()">Trả giá</button></p>
+<div id="listKho"></div>
+<p style="margin-top:10px">Nhiệm vụ: Bán <span id="ban">0</span>/8 ly | 5 sao <span id="s5">0</span>/3</p>
+<button class="btn-red" style="width:100%;margin-top:10px" onclick="showTab('pha')">MỞ CỬA BÁN →</button>
 </div>
 
-<div id="sach" style="display:none" class="box">
-<h3>Sổ sách</h3>
-<p>Lời hôm nay: <b id="loi">0k</b></p>
-<p>Đã bán: <b id="daBan">0</b> ly</p>
-<p>Khách 5 sao: <b id="kh5s">0</b></p>
-<button class="btnSmall" onclick="ketNgay()">Kết thúc ngày</button>
-</div>
+<div id="pha" class="box" style="display:none">
+<p id="khach">Khách: Bé Na - Ly M, 65%, có trân châu, đường 30%, đá 70%</p>
+<p>Chọn ly: <button onclick="cur.ly='M';render()">M</button> <button onclick="cur.ly='L';render()">L</button> <b id="curLy">M</b></p>
+<div class="ly"><div id="nuoc" class="nuoc" style="height:0%"></div></div>
+<p>Rót: <span id="rot">0</span>% <button class="btn-yel" onmousedown="rotOn=true" onmouseup="rotOn=false" ontouchstart="rotOn=true" ontouchend="rotOn=false">GIỮ ĐỂ RÓT</button> Cần: <span id="can">65</span>%</p>
+<p>Topping: <button onclick="toggleTop()">Trân châu</button> Đã chọn: <span id="top">Không</span></p>
+<p>Đường <input id="duong" type="range" min="0" max="100" value="30" oninput="cur.duong=this.value;document.getElementById('vDuong').innerText=this.value+'%'"> <span id="vDuong">30%</span></p>
+<p>Đá <input id="da" type="range" min="0" max="100" value="70" oninput="cur.da=this.value;document.getElementById('vDa').innerText=this.value+'%'"> <span id="vDa">70%</span></p>
+<button class="btn-red" style="width:100%" onclick="giao()">GIAO LY</button>
+<button style="width:100%;margin-top:6px" onclick="doBo()">Đổ bỏ</button>
 </div>
 
+<div id="sach" class="box" style="display:none">
+<p>Lời: <span id="loi">0k</span> - Đã bán: <span id="tongBan">0</span></p>
+<button class="btn-red" onclick="ketNgay()">Kết thúc ngày</button>
+</div>
+
+</div>
 <script>
-let data={day:1,ket:400,xp:0,cap:1,giam:15,ban:0,sao5:0,loi:0,tongSao:0,slDG:0}
-let kho={trasua:{ten:'Trà sữa',sl:12,gia:3,mau:'#c99a5a'}, matcha:{ten:'Matcha',sl:0,gia:5,mau:'#8fbc8f'}, tranChau:{ten:'Trân châu',sl:12,gia:2,icon:'⚫'}, thach:{ten:'Thạch',sl:5,gia:2,icon:'🟨'}}
-let cur={ly:'M',tra:'trasua',rot:0,tops:[],duong:50,da:50}
-let yeu={ly:'M',tra:'trasua',rot:65,tops:['tranChau'],duong:30,da:70}
-let pat=100, timer=null, rotTimer=null
-
-function $(id){return document.getElementById(id)}
-function save(){localStorage.setItem('gdct',JSON.stringify({data,kho}))}
-function load(){let s=JSON.parse(localStorage.getItem('gdct')||'null'); if(s){data=s.data; kho=s.kho}}
+let ket=400, xp=0, ban=0, sao5=0, giam=15, day=1, loi=0;
+let kho={trasua:12, tranChau:12};
+let cur={ly:'M',rot:0,tops:false,duong:30,da:70};
+let yeu={ly:'M',rot:65,tops:true,duong:30,da:70};
+let rotOn=false;
+setInterval(()=>{if(rotOn && cur.rot<100){cur.rot+=1; render()}},30);
 
 function render(){
-$('day').innerText=data.day; $('ket').innerText=data.ket+'k'; $('xp').innerText=data.xp+'/150 XP'; $('giam').innerText=data.giam+'%'; $('nvBan').innerText=data.ban+'/8'; $('nvSao').innerText=data.sao5+'/3'; $('daBan').innerText=data.ban; $('kh5s').innerText=data.sao5; $('loi').innerText=data.loi+'k'; $('slDG').innerText=data.slDG; $('diemTB').innerText=data.slDG? (data.tongSao/data.slDG).toFixed(1):'4.0';
-let html=''; let tong=0;
-for(let k in kho){html+=`<div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px dashed #eee"><span>${kho[k].ten} (${kho[k].sl}) - ${kho[k].gia}k</span><span><button class="btnSmall" onclick="nhap('${k}',5)">+5</button> <button class="btnSmall" onclick="nhap('${k}',10)">+10</button></span></div>`; tong+=kho[k].sl*kho[k].gia}
-let giamGia=Math.floor(tong*data.giam/100); $('tongTien').innerText=(tong-giamGia)+'k';
-$('khoList').innerHTML=html;
-$('traBtns').innerHTML=Object.keys(kho).filter(k=>!kho[k].icon).map(k=>`<button class="btnSmall ${cur.tra==k?'active':''}" onclick="cur.tra='${k}';renderPha()" style="${cur.tra==k?'border-color:#ff3b3b;color:#ff3b3b':''}">${kho[k].ten}</button>`).join(' ');
-$('topBtns2').innerHTML=Object.keys(kho).filter(k=>kho[k].icon).map(k=>`<button class="btnSmall" onclick="toggleTop('${k}')">${kho[k].icon} ${kho[k].ten} (${kho[k].sl})</button>`).join(' ');
-$('cap').innerText=data.cap;
+document.getElementById('ket').innerText=ket+'k';
+document.getElementById('xp').innerText=xp+'/150 XP';
+document.getElementById('ban').innerText=ban+'/8';
+document.getElementById('s5').innerText=sao5+'/3';
+document.getElementById('giam').innerText=giam;
+document.getElementById('curLy').innerText=cur.ly;
+document.getElementById('rot').innerText=cur.rot;
+document.getElementById('can').innerText=yeu.rot;
+document.getElementById('top').innerText=cur.tops?'Có':'Không';
+document.getElementById('nuoc').style.height=cur.rot+'%';
+document.getElementById('listKho').innerHTML='Trà sữa: '+kho.trasua+' ly - Trân châu: '+kho.tranChau+' phần';
+document.getElementById('loi').innerText=loi+'k';
+document.getElementById('tongBan').innerText=ban;
+document.getElementById('day').innerText=day;
 }
-function renderPha(){
-$('bM').style.borderColor=cur.ly=='M'?'#ff3b3b':'#eee'; $('bL').style.borderColor=cur.ly=='L'?'#ff3b3b':'#eee';
-$('nuoc').style.height=cur.rot+'%'; $('nuoc').style.background=kho[cur.tra]?.mau||'#c99a5a';
-$('vach').style.bottom=yeu.rot+'%'; $('pctRot').innerText=Math.floor(cur.rot)+'%'; $('pctCan').innerText=yeu.rot+'%';
-$('topDaChon').innerText=cur.tops.length?cur.tops.map(t=>kho[t].icon).join(' '):'Không'; $('topInLy').innerText=cur.tops.map(t=>kho[t].icon).join(' ');
-$('vDuong').innerText=cur.duong+'%'; $('vDa').innerText=cur.da+'%';
+function showTab(t){
+document.getElementById('kho').style.display=t=='kho'?'block':'none';
+document.getElementById('pha').style.display=t=='pha'?'block':'none';
+document.getElementById('sach').style.display=t=='sach'?'block':'none';
+document.getElementById('tKho').className=t=='kho'?'tab active':'tab';
+document.getElementById('tPha').className=t=='pha'?'tab active':'tab';
+document.getElementById('tSach').className=t=='sach'?'tab active':'tab';
+if(t=='pha') taoDon();
 }
-
-function nhap(k,sl){let gia=Math.floor(kho[k].gia*sl*(100-data.giam)/100); if(data.ket<gia){alert('Không đủ tiền!');return} data.ket-=gia; kho[k].sl+=sl; save(); render();}
-function traGia(){data.giam=Math.min(35,data.giam+5+Math.floor(Math.random()*10)); data.ket+=10; data.xp+=10; save(); render(); alert('Trả giá thành công! Giảm '+data.giam+'% và +10k');}
-
-function openTab(t){document.getElementById('kho').style.display=t=='kho'?'block':'none'; document.getElementById('pha').style.display=t=='pha'?'block':'none'; document.getElementById('sach').style.display=t=='sach'?'block':'none'; document.querySelectorAll('.tab').forEach(e=>e.classList.remove('active')); document.querySelector(`.tab[onclick="openTab('${t}')"]`).classList.add('active');}
-
-function moCua(){if(kho.trasua.sl<2){alert('Nhập thêm trà sữa đã!');return} taoDon(); openTab('pha');}
-
+function traGia(){giam=Math.min(35,giam+5); ket+=10; render(); alert('Đã trả giá! Giảm '+giam+'% +10k');}
+function toggleTop(){cur.tops=!cur.tops; render();}
+function doBo(){cur.rot=0; cur.tops=false; render();}
 function taoDon(){
-const ds=[{ten:'Bé Na',text:'ít đường thôi nha'},{ten:'Mẹ',text:'Mẹ thích ít ngọt nhiều đá'},{ten:'Bố',text:'Cho bố đậm đà nhé'},{ten:'Cô Hai',text:'Cô uống ly L quen rồi'}];
-let kh=ds[Math.floor(Math.random()*ds.length)];
-let loaiTra=Object.keys(kho).filter(k=>!kho[k].icon && kho[k].sl>0); if(loaiTra.length==0) loaiTra=['trasua'];
-yeu={ly:Math.random()>0.5?'M':'L', tra:loaiTra[Math.floor(Math.random()*loaiTra.length)], rot:60+Math.floor(Math.random()*20), tops:Math.random()>0.4?['tranChau']:[], duong:20+Math.floor(Math.random()*60), da:30+Math.floor(Math.random()*60)};
-$('tenKh').innerText='Khách: '+kh.ten; $('yeuCau').innerHTML=`1 ly <b>${yeu.ly}</b> <b>${kho[yeu.tra].ten}</b>, rót <b>${yeu.rot}%</b>, ${yeu.tops.length?'có '+yeu.tops.map(t=>kho[t].ten).join(','):'không topping'}, đường ${yeu.duong}%, đá ${yeu.da}%<br><small>"${kh.text}"</small>`;
-cur={ly:'M',tra:yeu.tra,rot:0,tops:[],duong:50,da:50}; pat=100; clearInterval(timer);
-timer=setInterval(()=>{pat-=0.5; $('patBar').style.width=pat+'%'; $('patBar').style.background=pat>50?'#4ade80':pat>20?'#facc15':'#ef4444'; if(pat<=0){clearInterval(timer); alert('Khách bỏ về vì đợi lâu!'); taoDon()}},80);
-renderPha();
+yeu={ly:Math.random()>0.5?'M':'L', rot:60+Math.floor(Math.random()*20), tops:Math.random()>0.5, duong:20+Math.floor(Math.random()*60), da:30+Math.floor(Math.random()*60)};
+document.getElementById('khach').innerText='Khách: Bé Na - Ly '+yeu.ly+', '+yeu.rot+'%, '+(yeu.tops?'có':'không')+' trân châu, đường '+yeu.duong+'%, đá '+yeu.da+'%';
+cur={ly:'M',rot:0,tops:false,duong:yeu.duong,da:yeu.da};
+document.getElementById('duong').value=cur.duong; document.getElementById('da').value=cur.da;
+document.getElementById('vDuong').innerText=cur.duong+'%'; document.getElementById('vDa').innerText=cur.da+'%';
+render();
 }
-
-function setLy(l){cur.ly=l; renderPha();}
-function toggleTop(t){if(cur.tops.includes(t)) cur.tops=cur.tops.filter(x=>x!=t); else {if(kho[t].sl<=0){alert('Hết '+kho[t].ten);return} cur.tops.push(t)} renderPha();}
-function startRot(){clearInterval(rotTimer); rotTimer=setInterval(()=>{if(cur.rot<100){cur.rot+=1; renderPha()}},30)}
-function stopRot(){clearInterval(rotTimer)}
-function doBo(){cur.rot=0; cur.tops=[]; renderPha();}
-$('rngDuong').oninput=e=>{cur.duong=parseInt(e.target.value); renderPha()}; $('rngDa').oninput=e=>{cur.da=parseInt(e.target.value); renderPha()};
-
 function giao(){
-if(cur.ly!=yeu.ly){alert('Sai cỡ ly! Khách cần ly '+yeu.ly);return}
-if(kho[cur.tra].sl<=0){alert('Hết trà!');return}
-kho[cur.tra].sl--; cur.tops.forEach(t=>{if(kho[t].sl>0) kho[t].sl--});
-
-let diem=0;
-if(Math.abs(cur.rot-yeu.rot)<=10) diem++;
-if(cur.tra==yeu.tra) diem++;
-if(JSON.stringify(cur.tops.sort())==JSON.stringify(yeu.tops.sort())) diem++;
-if(Math.abs(cur.duong-yeu.duong)<=20) diem++;
-if(Math.abs(cur.da-yeu.da)<=20) diem++;
-
-let sao=diem>=5?5:diem>=4?4:diem>=3?3:diem>=2?2:1;
-let tien=sao==5?45:sao==4?35:sao==3?25:sao==2?15:5;
-data.ket+=tien; data.loi+=tien; data.ban++; data.slDG++; data.tongSao+=sao; if(sao==5) data.sao5++; data.xp+=sao*10;
-if(data.xp>=150){data.cap++; data.xp=0; alert('🎉 Lên cấp '+data.cap+'!')}
-save(); render();
-alert((sao>=4?'🎉 Tuyệt vời! ':'')+sao+' sao +'+tien+'k - Đúng '+diem+'/5');
-if(data.ban>=8){alert('Hết ngày! Lời '+data.loi+'k'); ketNgay();} else taoDon();
+if(kho.trasua<=0){alert('Hết trà!');return}
+let d=0;
+if(cur.ly==yeu.ly) d++;
+if(Math.abs(cur.rot-yeu.rot)<=10) d++;
+if(cur.tops==yeu.tops) d++;
+if(Math.abs(cur.duong-yeu.duong)<=20) d++;
+if(Math.abs(cur.da-yeu.da)<=20) d++;
+let sao=d>=4?5:d>=3?4:d>=2?3:2;
+let tien=sao==5?40: sao==4?30:20;
+ket+=tien; loi+=tien; ban++; if(sao==5) sao5++; xp+=10; kho.trasua--;
+render();
+alert(sao+' sao! +'+tien+'k - Đúng '+d+'/5');
+if(ban>=8){alert('Hết ngày!'); ketNgay();} else taoDon();
 }
-function ketNgay(){
-for(let k in kho) kho[k].sl=Math.max(0,kho[k].sl-2);
-data.day++; data.ban=0; data.sao5=0; data.loi=0; data.giam=15; save(); render(); openTab('kho');
-}
-load(); render(); renderPha();
+function ketNgay(){day++; ban=0; sao5=0; loi=0; kho.trasua=Math.max(0,kho.trasua-1); render(); showTab('kho');}
+render();
 </script>
-</div>
 </body>
 </html>
