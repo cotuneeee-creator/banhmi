@@ -2,99 +2,154 @@
 <html lang="vi">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
-<title>Gia Đình Của Tôi - Tiệm Trà Nhỏ</title>
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<title>Gia Đình Của Tôi - Full Game</title>
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@700;800&display=swap" rel="stylesheet">
 <style>
-*{box-sizing:border-box;font-family:'Baloo 2',sans-serif}
-body{margin:0;background:#d8b894;display:flex;justify-content:center}
-#app{width:430px;background:#fef9ec;min-height:100vh;position:relative;padding-bottom:100px}
-.top{background:#fff8e8;display:flex;justify-content:space-between;align-items:center;padding:10px 14px;border-bottom:2px solid #f0d9b8}
-.top.day{font-size:22px;line-height:1}.top.money{color:#5a2a1a;font-size:28px;font-weight:800;text-align:center}.top.money small{color:#c0526b;font-size:14px}
-.awning{height:22px;background:repeating-linear-gradient(90deg,#ff8da1 0 30px,#fff 30px 60px);position:relative}
-.awning:after{content:'';position:absolute;bottom:-12px;left:0;right:0;height:24px;background:radial-gradient(circle at 15px 0, transparent 14px, #ff8da1 15px);background-size:30px 30px}
-.shop-bg{background:linear-gradient(#f7e3c1,#e8c9a0);padding:30px 14px 14px}
-.title{margin:-35px auto 10px;background:#fff8e8;border:4px solid #8a5a3a;border-radius:20px;padding:10px 20px;text-align:center;width:260px;font-size:24px;font-weight:800;color:#6b2a3a;box-shadow:0 4px 0 #8a5a3a}
-.board{background:#2d4a3e;border:8px solid #8a5a3a;border-radius:18px;padding:16px;color:#fef9ec}
-.board h2{text-align:center;margin:0 0 10px;font-size:26px}
-.menu{display:grid;grid-template-columns:1fr 1fr;gap:8px;font-size:16px}
-.menu div{border-bottom:1px dashed #5a7a6a;padding:6px 0;display:flex;justify-content:space-between}
-.tabs{display:flex;gap:0;margin:14px 12px 0;overflow:auto}
-.tab{flex:1;background:#e8dcc6;padding:10px 6px;border-radius:16px 16px 0 0;text-align:center;font-size:14px;font-weight:700;min-width:80px}
-.tab.active{background:#fff;box-shadow:0 -2px 0 #fff}
-.content{background:#fff;border-radius:0 0 18px 18px;margin:0 12px;padding:12px;box-shadow:0 4px 0 #e8dcc6}
-.filter{display:flex;gap:8px;margin-bottom:12px}
-.filter button{flex:1;padding:10px;border-radius:20px;border:2px solid #e8dcc6;background:#fff;font-weight:700}
-.filter button.active{background:#ff6b8a;color:#fff;border-color:#ff6b8a}
-.item{display:flex;align-items:center;gap:10px;padding:12px 0;border-bottom:1px solid #f0e0c0}
-.qty{display:flex;align-items:center;gap:6px;margin-left:auto}
-.qty button{width:44px;height:44px;border-radius:12px;border:2px solid #e8dcc6;background:#fffaf0;font-size:20px;font-weight:800}
-.qty div{width:64px;height:44px;background:#fffaf0;border:2px solid #e8dcc6;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:800}
-.bottom{position:fixed;bottom:0;width:430px;max-width:100%;background:#ff4d4d;color:#fff;padding:14px;border-radius:20px 20px 0 0;text-align:center;font-size:20px;font-weight:800;box-shadow:0 -4px 0 #b52020}
+*{box-sizing:border-box;font-family:'Baloo 2',sans-serif;margin:0}
+body{background:#d8b894;overflow:hidden}
+#app{width:100vw;height:100vh;background:#fef9ec;display:flex;flex-direction:column}
+.top{background:#fff8e8;display:flex;justify-content:space-between;align-items:center;padding:8px 12px;box-shadow:0 2px 0 #e8dcc6;z-index:10}
+.awning{height:18px;background:repeating-linear-gradient(90deg,#ff8da1 0 26px,#fff 26px 52px);flex-shrink:0}
+.main{flex:1;overflow:auto;padding-bottom:80px}
+.title{margin:-14px auto 8px;background:#fff8e8;border:3px solid #8a5a3a;border-radius:16px;padding:6px 16px;width:260px;text-align:center;font-weight:800;color:#5a2232;box-shadow:0 3px 0 #8a5a3a}
+.board{background:#2d4a3e;border:5px solid #8a5a3a;border-radius:14px;margin:0 10px;padding:10px;color:#fff}
+.tabs{display:flex;gap:3px;margin:10px 6px 0;position:sticky;top:0;background:#fef9ec;z-index:5;padding-top:4px}
+.tab{flex:1;background:#e8dcc6;padding:8px 2px;border-radius:14px 14px 0 0;text-align:center;font-size:12px;font-weight:800;cursor:pointer}
+.tab.active{background:#fff}
+.content{background:#fff;margin:0 6px;border-radius:0 0 14px 14px;padding:10px;min-height:300px}
+.filt{display:flex;gap:6px;margin:8px 0}
+.filt button{flex:1;padding:8px;border-radius:20px;border:2px solid #e8dcc6;background:#fff;font-weight:700}
+.filt button.active{background:#ff6b8a;color:#fff;border-color:#ff6b8a}
+.item{display:flex;align-items:center;gap:8px;padding:10px 0;border-bottom:1px solid #f3e6c8}
+.qty{display:flex;align-items:center;gap:4px;margin-left:auto}
+.qty button{width:38px;height:38px;border-radius:10px;border:2px solid #e8dcc6;background:#fffaf0;font-weight:800;font-size:18px}
+.qty div{width:46px;height:38px;border:2px solid #e8dcc6;border-radius:10px;display:flex;align-items:center;justify-content:center;font-weight:800}
+.cardUp{background:#fff8e8;border:2px dashed #e8c98a;border-radius:10px;padding:8px;margin:6px 0;display:flex;justify-content:space-between;align-items:center}
+.btn{border:0;border-radius:10px;padding:8px 12px;font-weight:800}
+.btn-red{background:#ff3b3b;color:#fff}.btn-green{background:#22c55e;color:#fff}
+.bottom{position:fixed;bottom:0;left:0;right:0;background:#ff3b3b;color:#fff;padding:12px;text-align:center;font-weight:800;font-size:16px;cursor:pointer;z-index:20}
+.ly{width:110px;height:140px;border:3px solid #4a2a1a;border-top:0;border-radius:0 0 20px 20px;margin:8px auto;position:relative;background:#fff;overflow:hidden}
+.nuoc{position:absolute;bottom:0;left:0;right:0}
+.bar{height:6px;background:#eee;border-radius:6px;overflow:hidden}.bar i{display:block;height:100%}
+.pha-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
 </style>
 </head>
 <body>
 <div id="app">
-<div class="top">
-<div>⚙️ <b class="day">Ngày 1</b><br><small>Chuẩn bị</small></div>
-<div class="money"><small>Gia Đình Của Tôi</small><br><span id="ket">400k</span></div>
-<div style="text-align:right">⭐⭐⭐⭐☆<br><small>4,0 · 0 đánh giá</small></div>
-</div>
+<div class="top"><div>⚙️ <b id="day">Ngày 1</b><br><small style="font-size:11px">Chuẩn bị</small></div><div style="text-align:center"><b>Gia Đình Của Tôi</b><br><b id="ket" style="font-size:22px">400k</b></div><div style="text-align:right"><span id="stars">★★★★☆</span><br><small id="danhgia" style="font-size:11px">4.0 · 0 đánh giá</small></div></div>
 <div class="awning"></div>
-<div class="shop-bg">
+<div class="main">
 <div class="title">Gia Đình Của Tôi ✏️</div>
-<div class="board">
-<h2>🧋 Menu hôm nay</h2>
-<div class="menu">
-<div><span>Trà sữa</span><b>25k</b></div>
-<div><span>Matcha</span><b>30k</b></div>
-</div>
-<div style="margin-top:10px;font-weight:800">Topping</div>
-<div class="menu">
-<div><span>Trân châu đen</span><b>+6k</b></div>
-<div><span>Trân châu trắng</span><b>+5k</b></div>
-</div>
-<div style="text-align:center;margin-top:8px">Size L +7k</div>
-</div>
-</div>
+<div class="board"><div style="text-align:center">🧋 Menu hôm nay</div><div style="display:flex;justify-content:space-between;font-size:14px"><span>Trà sữa <b id="p-ts">25k</b></span><span>Matcha <b id="p-mt">30k</b></span></div><div style="display:flex;justify-content:space-between;font-size:14px;margin-top:4px"><span>Topping</span><span>Size L +7k</span></div><div style="display:flex;justify-content:space-between;font-size:13px"><span>Trân châu đen +6k</span><span>Trân châu trắng +5k</span></div></div>
 
 <div class="tabs">
-<div class="tab active">📦<br>Kho</div>
-<div class="tab">🛠️<br>Nâng cấp</div>
-<div class="tab">🏷️<br>Giá bán</div>
-<div class="tab">⭐<br>Đánh giá</div>
-<div class="tab">📊<br>Tổng kết</div>
-</div>
-<div class="content">
-<div style="background:#fef6e8;border-radius:12px;padding:10px;text-align:center;margin-bottom:10px">👨‍👩‍👧‍👦 ~18 khách hôm nay</div>
-<div class="filter">
-<button class="active" onclick="setF('tra',this)">🍵 Trà</button>
-<button onclick="setF('top',this)">🧊 Topping</button>
-<button onclick="setF('ly',this)">🥤 Ly</button>
-</div>
-<div id="list"></div>
-<div style="font-size:11px;text-align:center;margin-top:10px;opacity:.7">📦 đang có · 📊 hôm qua dùng · ⚠️ hết hạn hôm nay</div>
+<div class="tab active" onclick="go('kho',this)">📦 Kho</div>
+<div class="tab" onclick="go('pha',this)">🍹 Pha</div>
+<div class="tab" onclick="go('nang',this)">🛠️ Nâng cấp</div>
+<div class="tab" onclick="go('gia',this)">🏷️ Giá</div>
+<div class="tab" onclick="go('tk',this)">📊 TK</div>
 </div>
 
-<div class="bottom" id="warn">⚠️ Chưa nấu 🍵 Trà · 🧊 Topping · 🥤 Ly</div>
+<div id="kho" class="content">
+<div style="background:#fef6e8;padding:6px;border-radius:8px;text-align:center;font-size:13px">👨‍👩‍👧 ~18 khách hôm nay · Cấp <span id="cap">1</span> (<span id="xp">0/150 XP</span>)</div>
+<div class="filt"><button class="active" onclick="setF('tra',this)">🍵 Trà</button><button onclick="setF('top',this)">🧊 Topping</button><button onclick="setF('ly',this)">🥤 Ly</button></div>
+<div id="listKho"></div>
+</div>
+
+<div id="pha" class="content" style="display:none">
+<div style="display:flex;justify-content:space-between"><b id="tenK">Chưa có khách</b><span id="cam">😊</span></div><div id="yc" style="background:#fff8e1;padding:6px;border-radius:8px;margin:6px 0;font-size:13px"></div><div class="bar"><i id="pat" style="width:100%;background:#4ade80"></i></div>
+<div style="text-align:center;margin-top:8px">
+<div id="traBtns"></div>
+<div class="ly"><div id="nuoc" class="nuoc" style="height:0%"></div><div id="topLy" style="position:absolute;bottom:14px;width:100%;text-align:center"></div><div id="vach" style="position:absolute;left:0;right:0;border-top:2px dashed red"></div></div>
+<div>Đã rót <b id="rot">0</b>% / Cần <b id="can">65</b>% <button class="btn" style="background:#ffe27a" onmousedown="bd()" onmouseup="kt()" ontouchstart="bd()" ontouchend="kt()">GIỮ ĐỂ RÓT</button></div>
+<div class="pha-grid" style="margin-top:8px">
+<div>Cỡ ly: <button class="btn" onclick="CL.ly='M';R2()">M</button> <button class="btn" onclick="CL.ly='L';R2()">L</button> <b id="cLy">M</b></div>
+<div>Đường <input id="rngD" type="range" min="0" max="100" value="30"> <span id="vD">30%</span></div>
+<div>Topping: <span id="topBtns"></span><br>Đã chọn: <b id="cTop">Không</b></div>
+<div>Đá <input id="rngDa" type="range" min="0" max="100" value="70"> <span id="vDa">70%</span></div>
+</div>
+<div style="display:flex;gap:6px;margin-top:10px"><button class="btn btn-red" style="flex:1" onclick="giao()">Giao ly</button><button class="btn" style="background:#ddd;flex:1" onclick="doBo()">Đổ bỏ</button></div>
+</div>
+</div>
+
+<div id="nang" class="content" style="display:none"><h4>🛠️ Nâng cấp</h4><div id="listNang"></div></div>
+<div id="gia" class="content" style="display:none"><h4>🏷️ Giá bán - Chỉnh giá lời nhiều hơn</h4><div id="listGia"></div></div>
+<div id="tk" class="content" style="display:none"><h4>📊 Tổng kết</h4><p>Bán: <b id="ban">0</b>/8 | 5 sao: <b id="s5">0</b>/3 | Lời: <b id="loi">0k</b></p><div id="listDG"></div><button class="btn btn-red" style="width:100%;margin-top:10px" onclick="ketNgay()">Kết thúc ngày</button></div>
+</div>
+
+<div class="bottom" id="warn" onclick="handleBottom()">⚠️ Nhập Kho để mở bán</div>
 </div>
 
 <script>
-let kho={trasua:{ten:'Trà sữa',sl:0,gia:4.5,han:3,mau:'#c69a5a',loai:'tra'}, matcha:{ten:'Matcha',sl:0,gia:6,han:3,mau:'#8fbc8f',loai:'tra'}, tranDen:{ten:'Trân châu đen',sl:0,gia:3,icon:'⚫',loai:'top'}, tranTrang:{ten:'Trân châu trắng',sl:0,gia:2.5,icon:'⚪',loai:'top'}, ly:{ten:'Ly',sl:0,gia:1,icon:'🥤',loai:'ly'}};
-let f='tra';
-function setF(t,el){f=t;document.querySelectorAll('.filter button').forEach(b=>b.classList.remove('active'));el.classList.add('active');render()}
+let S={day:1,ket:400,xp:0,cap:1,ban:0,s5:0,loi:0,sl:0,tong:0,gm:15};
+let kho={
+trasua:{ten:'Trà sữa',sl:0,gia:5,giaBan:25,loai:'tra',icon:'🍵',mau:'#c99a5a'},
+matcha:{ten:'Matcha',sl:0,gia:6,giaBan:30,loai:'tra',icon:'🍵',mau:'#8fbc8f',khoa:true},
+cacao:{ten:'Cacao',sl:0,gia:6,giaBan:32,loai:'tra',icon:'🍵',mau:'#7a4a2a',khoa:true},
+tranDen:{ten:'Trân châu đen',sl:0,gia:2,giaBan:6,loai:'top',icon:'⚫'},
+tranTrang:{ten:'Trân châu trắng',sl:0,gia:2.5,giaBan:5,loai:'top',icon:'⚪'},
+cheese:{ten:'Kem cheese',sl:0,gia:4,giaBan:8,loai:'top',icon:'☁️',khoa:true},
+lyM:{ten:'Ly M',sl:0,gia:1,loai:'ly',icon:'🥤'},
+lyL:{ten:'Ly L',sl:0,gia:1.5,loai:'ly',icon:'🥤'}
+};
+let nang=[
+{id:'matcha',ten:'Mở Matcha',gia:150},{id:'cacao',ten:'Mở Cacao',gia:200},{id:'cheese',ten:'Mở Kem Cheese',gia:120},{id:'ban',ten:'Bàn gỗ + sao',gia:100},{id:'den',ten:'Đèn lồng',gia:50}
+];
+let f='tra', CL={ly:'M',tra:'trasua',rot:0,tops:[],du:30,da:70}, Y={ly:'M',tra:'trasua',rot:65,tops:['tranDen'],du:30,da:70}, pat=100, t1=null, r1=null;
+function go(id,el){['kho','pha','nang','gia','tk'].forEach(x=>document.getElementById(x).style.display=x==id?'block':'none');document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));el.classList.add('active');if(id=='pha'&&S.ban==0) tao(); render()}
+function setF(t,el){f=t;document.querySelectorAll('.filt button').forEach(b=>b.classList.remove('active'));el.classList.add('active');render()}
+function chg(k,d){let gia=Math.floor(kho[k].gia*Math.abs(d)*(100-S.gm)/100);if(d>0&&S.ket<gia){alert('Không đủ tiền!');return}if(d>0)S.ket-=gia; kho[k].sl=Math.max(0,Math.min(99,kho[k].sl+d)); if(d<0) S.ket+=Math.floor(gia*0.5); render()}
 function render(){
-let h='';
-for(let k in kho) if(kho[k].loai==f){
-h+=`<div class="item"><div style="font-size:32px">${kho[k].icon||'🍵'}</div><div><b>${kho[k].ten}</b> <span style="background:#fef3c7;padding:2px 6px;border-radius:8px;font-size:12px">⏳ ${kho[k].han} ngày</span><br><small>📦 ${kho[k].sl} · ${kho[k].gia}k</small></div><div class="qty"><button onclick="chg('${k}',-1)">-</button><div id="q-${k}">${kho[k].sl}</div><button onclick="chg('${k}',1)">+</button></div></div>`;
+document.getElementById('day').innerText='Ngày '+S.day;document.getElementById('ket').innerText=S.ket+'k';document.getElementById('cap').innerText=S.cap;document.getElementById('xp').innerText=S.xp+'/150 XP';document.getElementById('ban').innerText=S.ban;document.getElementById('s5').innerText=S.s5;document.getElementById('loi').innerText=S.loi+'k';
+document.getElementById('p-ts').innerText=kho.trasua.giaBan+'k';document.getElementById('p-mt').innerText=kho.matcha.khoa?'30k':kho.matcha.giaBan+'k';
+let hk='';for(let k in kho) if(kho[k].loai==f &&!kho[k].khoa){hk+=`<div class="item"><div style="font-size:26px">${kho[k].icon}</div><div><b>${kho[k].ten}</b> <span style="background:#fef3c7;padding:2px 6px;border-radius:6px;font-size:10px">⏳ 3 ngày</span><br><small>📦 ${kho[k].sl} · ${kho[k].gia}k</small></div><div class="qty"><button onclick="chg('${k}',-1)">-</button><div>${kho[k].sl}</div><button onclick="chg('${k}',1)">+</button></div></div>`}
+document.getElementById('listKho').innerHTML=hk||'<p style="text-align:center">Mở khóa thêm ở Nâng cấp!</p>';
+
+let hn='';nang.forEach(n=>{let locked=n.id=='matcha'?kho.matcha.khoa:n.id=='cacao'?kho.cacao.khoa:n.id=='cheese'?kho.cheese.khoa:false;let bought=n.id!='matcha'&&n.id!='cacao'&&n.id!='cheese'?false:!locked;hn+=`<div class="cardUp"><div><b>${n.ten}</b><br><small>${n.gia}k</small></div><button class="btn ${bought?'':'btn-red'}" style="background:${bought?'#ccc':''}" onclick="muaN('${n.id}',${n.gia})">${bought?'Đã mua':'Mua'}</button></div>`});document.getElementById('listNang').innerHTML=hn;
+
+let hg='';for(let k in kho) if(!kho[k].khoa){hg+=`<div class="cardUp"><div>${kho[k].icon} ${kho[k].ten}</div><div><button class="btn" onclick="kho['${k}'].giaBan=Math.max(5,kho['${k}'].giaBan-1);render()">-</button> <b>${kho[k].giaBan}k</b> <button class="btn" onclick="kho['${k}'].giaBan++;render()">+</button></div></div>`}document.getElementById('listGia').innerHTML=hg;
+
+let duKho = kho.trasua.sl>0 && kho.tranDen.sl>0 && kho.lyM.sl>0;
+let w=document.getElementById('warn');
+if(!duKho){w.innerText='⚠️ Chưa đủ nguyên liệu - Nhập Trà, Trân châu, Ly ở tab Kho';w.style.background='#ff3b3b';}
+else if(S.ban>=8){w.innerText='✅ Xong 8 ly - Bấm để kết thúc ngày';w.style.background='#22c55e';}
+else{w.innerText='✅ Đã sẵn sàng - Bấm để Bán - Đang bán '+S.ban+'/8 ly';w.style.background='#22c55e';}
+R2();
 }
-document.getElementById('list').innerHTML=h;
-let thieu=Object.keys(kho).filter(k=>kho[k].sl==0).length;
-document.getElementById('warn').style.display=thieu>0?'block':'none';
-document.getElementById('warn').innerHTML=thieu>0?'⚠️ Chưa nấu 🍵 Trà · 🧊 Topping · 🥤 Ly':'✅ Đã sẵn sàng mở bán →';
-document.getElementById('warn').onclick=()=>{if(thieu==0) alert('Mở bán! Đã giống hệt tiemtranho.com rồi!');};
+function R2(){
+document.getElementById('cLy').innerText=CL.ly;document.getElementById('rot').innerText=Math.floor(CL.rot);document.getElementById('can').innerText=Y.rot;document.getElementById('vach').style.bottom=Y.rot+'%';document.getElementById('nuoc').style.height=CL.rot+'%';document.getElementById('nuoc').style.background=kho[CL.tra]?.mau||'#c99a5a';document.getElementById('topLy').innerText=CL.tops.map(t=>kho[t]?.icon||'').join(' ');document.getElementById('cTop').innerText=CL.tops.length?CL.tops.map(t=>kho[t].ten).join(','):'Không';document.getElementById('vD').innerText=CL.du+'%';document.getElementById('vDa').innerText=CL.da+'%';
+let tb='';for(let k in kho) if(kho[k].loai=='tra'&&!kho[k].khoa) tb+=`<button class="btn ${CL.tra==k?'btn-red':''}" onclick="CL.tra='${k}';R2()">${kho[k].icon} ${kho[k].ten}</button> `;document.getElementById('traBtns').innerHTML=tb;
+let tp='';for(let k in kho) if(kho[k].loai=='top'&&!kho[k].khoa) tp+=`<button class="btn ${CL.tops.includes(k)?'btn-red':''}" onclick="togTop('${k}')">${kho[k].icon}</button> `;document.getElementById('topBtns').innerHTML=tp;
 }
-function chg(k,d){kho[k].sl=Math.max(0,Math.min(99,kho[k].sl+d));render()}
+function togTop(k){if(CL.tops.includes(k)) CL.tops=CL.tops.filter(x=>x!=k); else{if(kho[k].sl<=0){alert('Hết '+kho[k].ten);return}CL.tops.push(k)}R2()}
+function bd(){clearInterval(r1);r1=setInterval(()=>{if(CL.rot<100){CL.rot+=1.5;R2()}},30)}function kt(){clearInterval(r1)}
+function doBo(){CL.rot=0;CL.tops=[];R2()}
+document.getElementById('rngD').oninput=e=>{CL.du=e.target.value;R2()};document.getElementById('rngDa').oninput=e=>{CL.da=e.target.value;R2()}
+function tao(){
+if(kho.trasua.sl<=0){alert('Hết trà sữa! Nhập ở Kho!');go('kho',document.querySelectorAll('.tab')[0]);return}
+let ds=['Bé Na','Mẹ','Bố','Cô Hai'];let tras=Object.keys(kho).filter(x=>kho[x].loai=='tra'&&kho[x].sl>0&&!kho[x].khoa);if(tras.length==0) tras=['trasua'];
+Y={ly:Math.random()>0.5?'M':'L',tra:tras[Math.floor(Math.random()*tras.length)],rot:55+Math.floor(Math.random()*25),tops:Math.random()>0.5?['tranDen']:[],du:10+Math.floor(Math.random()*70),da:20+Math.floor(Math.random()*60)};
+document.getElementById('tenK').innerText='Khách: '+ds[Math.floor(Math.random()*4)];document.getElementById('yc').innerHTML=`1 ly <b>${Y.ly}</b> <b>${kho[Y.tra].ten}</b> rót <b>${Y.rot}%</b> ${Y.tops.length?'có '+Y.tops.map(t=>kho[t].ten).join(','):'không topping'} đường ${Y.du}% đá ${Y.da}%`;
+CL={ly:'M',tra:Y.tra,rot:0,tops:[],du:Y.du,da:Y.da};document.getElementById('rngD').value=CL.du;document.getElementById('rngDa').value=CL.da;pat=100;clearInterval(t1);t1=setInterval(()=>{pat-=0.3;document.getElementById('pat').style.width=pat+'%';document.getElementById('pat').style.background=pat>50?'#4ade80':pat>20?'#facc15':'#ef4444';if(pat<=0){clearInterval(t1);alert('Khách bỏ về!');tao()}},60);R2();
+}
+function giao(){
+if(CL.ly!=Y.ly){alert('Sai cỡ ly! Cần ly '+Y.ly);return}
+if(CL.ly=='M'&&kho.lyM.sl<=0||CL.ly=='L'&&kho.lyL.sl<=0){alert('Hết ly!');return}
+clearInterval(t1);
+let d=0;if(CL.ly==Y.ly)d++;if(Math.abs(CL.rot-Y.rot)<=10)d++;if(CL.tra==Y.tra)d++;if(JSON.stringify(CL.tops.sort())==JSON.stringify(Y.tops.sort()))d++;if(Math.abs(CL.du-Y.du)<=20)d++;if(Math.abs(CL.da-Y.da)<=20)d++;
+let sao=d>=5?5:d>=4?4:d>=3?3:2;let tien=(kho[CL.tra].giaBan + CL.tops.reduce((s,t)=>s+kho[t].giaBan,0) + (CL.ly=='L'?7:0));
+if(sao<3) tien=Math.floor(tien*0.6);
+S.ket+=tien;S.loi+=tien;S.ban++;S.sl++;S.tong+=sao;if(sao==5)S.s5++;S.xp+=10;if(S.xp>=150){S.cap++;S.xp=0}
+kho[CL.tra].sl--;kho[CL.ly=='M'?'lyM':'lyL'].sl--;CL.tops.forEach(t=>{if(kho[t].sl>0)kho[t].sl--});
+document.getElementById('danhgia').innerText=(S.sl? (S.tong/S.sl).toFixed(1):'4.0')+' · '+S.sl+' đánh giá';document.getElementById('stars').innerText='★★★★'+(S.tong/S.sl>=4.5?'★':'☆');
+render();
+alert(sao+' sao! +'+tien+'k - Đúng '+d+'/6');
+if(S.ban>=8) ketNgay(); else tao();
+}
+function muaN(id,gia){if(S.ket<gia){alert('Không đủ tiền');return}S.ket-=gia;if(id=='matcha') kho.matcha.khoa=false; if(id=='cacao') kho.cacao.khoa=false; if(id=='cheese') kho.cheese.khoa=false; render(); alert('Đã mở '+id);}
+function ketNgay(){S.day++;S.ban=0;S.s5=0;S.loi=0;for(let k in kho) kho[k].sl=Math.max(0,kho[k].sl-2);render();go('kho',document.querySelectorAll('.tab')[0]);}
+function handleBottom(){let du=kho.trasua.sl>0&&kho.tranDen.sl>0&&kho.lyM.sl>0;if(!du){go('kho',document.querySelectorAll('.tab')[0]);} else if(S.ban>=8){ketNgay();} else{go('pha',document.querySelectorAll('.tab')[1]);tao();}}
 render();
 </script>
 </div>
